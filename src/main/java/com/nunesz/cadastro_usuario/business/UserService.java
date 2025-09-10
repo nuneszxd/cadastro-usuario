@@ -14,6 +14,10 @@ public class UserService {
     }
 
     public void saveUser(User user){
+
+        if (repository.findByEmail(user.getEmail()).isPresent()){
+            throw new RuntimeException("Email já cadastrado!");
+        }
         repository.saveAndFlush(user);
     }
 
